@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
 		param.Message = "message";
 		param.Title = "title";
 
-		Navigate(BActivity.class)
+		navigate(BActivity.class)
 		.param(param)
 		.handler(MainActivityResultParam.class, new CommonSimpleHandlerGenic<Object>(){
 			@Override

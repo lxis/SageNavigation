@@ -7,33 +7,48 @@ import com.sage.core.CommonSimpleHandlerGenic;
 
 import android.app.Activity;
 
+/*
+ *  Fluent interface for building navigation info easily
+ */
 public class NavigationInterface
 {
-	BaseActivity activity;	
-	Object param;
-	HashMap<Class, CommonSimpleHandlerGenic<Object>> Handlers = new HashMap<Class, CommonSimpleHandlerGenic<Object>>();
-	Class classType;
+	BaseActivity currentActivity;	
+	Object navigateParam;
+	HashMap<Class, CommonSimpleHandlerGenic<Object>> resultHandlers = new HashMap<Class, CommonSimpleHandlerGenic<Object>>();
+	Class navigateToClassType;
 	
-	public NavigationInterface(BaseActivity activity,Class classType)
+	/*
+	 *  Init navigation interface with some init info
+	 */
+	public NavigationInterface(BaseActivity currentActivity,Class navigateToClassType)
 	{
-		this.activity = activity;		
-		this.classType = classType;
+		this.currentActivity = currentActivity;		
+		this.navigateToClassType = navigateToClassType;
 	}
 	
-	public NavigationInterface param(Object param)
+	/*
+	 *  Set param which will set to navigated activity
+	 */
+	public NavigationInterface param(Object navigateParam)
 	{
-		this.param = param;
+		this.navigateParam = navigateParam;
 		return this;
 	}
 	
-	public NavigationInterface handler(Class classType,CommonSimpleHandlerGenic<Object> handler)
+	/*
+	 *  Set result handler in case navigated activity setting result.
+	 */
+	public NavigationInterface handler(Class resultClassType,CommonSimpleHandlerGenic<Object> resultHandler)
 	{
-		Handlers.put(classType, handler);
+		resultHandlers.put(resultClassType, resultHandler);
 		return this;
 	}
 	
+	/*
+	 *  Finish setting navigating info
+	 */
 	public void go()
 	{
-		activity.go(classType,param, Handlers);		
+		currentActivity.go(navigateToClassType,navigateParam, resultHandlers);		
 	}
 }

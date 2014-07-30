@@ -31,33 +31,35 @@ public class BaseActivity extends Activity
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){	
 		super.onActivityResult(requestCode, resultCode, data);		
 		Bundle bundle = data.getExtras();
-		String fromType = bundle.getString("FromType");
-		String resultTypeText = bundle.getString("ResultType");
-		String resultText = bundle.getString("Result");
+		String fromType = bundle.getString(TransferDataConstant.FromType);
+		String resultTypeText = bundle.getString(TransferDataConstant.ResultType);
+		String resultText = bundle.getString(TransferDataConstant.Result);
 		
 		Type resultType = new Gson().fromJson(resultTypeText,Type.class);
 		Object result = new Gson().fromJson(resultText, resultType);
 		
 		CommonSimpleHandlerGenic<Object> handler = handlers.get(fromType);
 		handler.Run(result);
-//		new Gson().fromJson(json, typeOfT) result
-//		CommonSimpleHandlerGenic<Object> handler = Result.get(resultType);
-//		handler.Run(item);
-//		handler.Run(bundle.get("Result"));			
 	}
 	
-	public NavigationInterface Navigate(Class classType)
+	/*
+	 *  Start buiding navigation info 
+	 */
+	public NavigationInterface navigate(Class classType)
 	{
 		return new NavigationInterface(this,classType);
 	}
 	
 	HashMap<String, CommonSimpleHandlerGenic<Object>> handlers = new HashMap<String, CommonSimpleHandlerGenic<Object>>();
 	
+	/*
+	 *  Navigate by all navigation info
+	 */
 	public void go(Class NavigateClass,Object Param,HashMap<Class, CommonSimpleHandlerGenic<Object>> handlers)
 	{		
 		Intent intent = new Intent(this,NavigateClass);
 		Bundle b = new Bundle(); 		
-		b.putString("NavigateParam", new Gson().toJson(Param));
+		b.putString(TransferDataConstant.NavigateParam, new Gson().toJson(Param));
 		intent.putExtras(b);
 		
 		Iterator<Entry<Class, CommonSimpleHandlerGenic<Object>>> entryKeyIterator = handlers.entrySet().iterator();
@@ -68,19 +70,25 @@ public class BaseActivity extends Activity
 		this.startActivityForResult(intent,1);
 	}	
 	
+	/*
+	 *  Send param to previous activity
+	 */
 	public void setResult(Object object)
 	{
 		Intent intent = new Intent();
 		Bundle bundle = new Bundle();				
-		bundle.putString("FromType", this.getClass().getName());
-		bundle.putString("ResultType", new Gson().toJson(object.getClass()));
-		bundle.putString("Result",new Gson().toJson(object));
+		bundle.putString(TransferDataConstant.FromType, this.getClass().getName());
+		bundle.putString(TransferDataConstant.ResultType, new Gson().toJson(object.getClass()));
+		bundle.putString(TransferDataConstant.Result,new Gson().toJson(object));
 		intent.putExtras(bundle);
 		setResult(1, intent);
 	}
 	
+	/*
+	 *  Get param from previous activity
+	 */
 	public <T> T getParam(Class<T> classType )
 	{
-		return new Gson().fromJson(getIntent().getExtras().getString("NavigateParam"),classType);
+		return new Gson().fromJson(getIntent().getExtras().getString(TransferDataConstant.NavigateParam),classType);
 	}		
 }
