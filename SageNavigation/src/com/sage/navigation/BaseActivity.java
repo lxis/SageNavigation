@@ -16,7 +16,9 @@ import android.os.Bundle;
 
 
 
+
 import com.google.gson.Gson;
+import com.sage.core.CommonSimpleHandlerGenic;
 
 public class BaseActivity extends Activity
 {	

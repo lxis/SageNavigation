@@ -1,10 +1,10 @@
 package example;
 
+import com.sage.core.CommonSimpleHandlerGenic;
 import com.sage.navigation.BaseActivity;
-import com.sage.navigation.CommonSimpleHandlerGenic;
 import com.sage.navigation.R;
-import example.BActivity.BActivityParam;
 
+import example.BActivity.BActivityParam;
 import android.os.Bundle;
 import android.view.Menu;
 

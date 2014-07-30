@@ -3,6 +3,8 @@ package com.sage.navigation;
 
 import java.util.HashMap;
 
+import com.sage.core.CommonSimpleHandlerGenic;
+
 import android.app.Activity;
 
 public class NavigationInterface
