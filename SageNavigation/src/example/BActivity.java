@@ -9,24 +9,22 @@ import android.os.Bundle;
 
 public class BActivity extends BaseActivity {
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        
-        NavigateMethod();
-    }
-    
-	public static class BActivityParam
-	{
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		NavigateMethod();
+	}
+
+	public static class BActivityParam {
 		public String Title;
-		public String Message;			
-	}	
+		public String Message;
+	}
 
 	private void NavigateMethod() {
-		BActivityParam param1 = getParam(BActivityParam.class);			
+		BActivityParam param1 = getParam(BActivityParam.class);
 		MainActivityResultParam param = new MainActivityResultParam();
-		param.Title = "aaa";		
-		setResult(param);		
+		param.Title = "aaa";
+		setResult(param);
 	}
 }
