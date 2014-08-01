@@ -1,21 +1,13 @@
 package com.sage.navigation;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Random;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-
-
-
-
 
 import com.google.gson.Gson;
 import com.sage.core.CommonSimpleHandlerGenic;
@@ -39,7 +31,7 @@ public class BaseActivity extends Activity
 		Object result = new Gson().fromJson(resultText, resultType);
 		
 		CommonSimpleHandlerGenic<Object> handler = handlers.get(fromType);
-		handler.Run(result);
+		handler.run(result);
 	}
 	
 	/*

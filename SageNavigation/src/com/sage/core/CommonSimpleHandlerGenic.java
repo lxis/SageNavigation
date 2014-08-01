@@ -2,5 +2,5 @@ package com.sage.core;
 
 public abstract class CommonSimpleHandlerGenic<T>
 {
-	public abstract <T> void Run(T item);
+	public abstract <T> void run(T item);
 }
